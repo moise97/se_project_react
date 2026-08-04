@@ -1,6 +1,7 @@
 import "./Header.css";
 
-function Header() {
+function Header(props) {
+  return <p>{props.location}</p>;
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -14,7 +15,9 @@ function Header() {
         + Add clothes
       </button>
       <div className="header__user-container">
-        <p className="header__username">Moise Michaud</p>
+        <p className="header__date-location">
+          {currentDate}, {location}
+        </p>
         <img src="" alt="Moise Michaud" className="header__avatar" />
       </div>
     </header>

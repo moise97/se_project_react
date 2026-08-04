@@ -1,0 +1,10 @@
+.main {
+  padding: 0 40px;
+}
+
+.main__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 0;
+}
