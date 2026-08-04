@@ -18,20 +18,3 @@ function App() {
 }
 
 export default App;
-
-import "./App.css";
-import Header from "../Header/Header.jsx";
-import Main from "../Main/Main.jsx";
-import Footer from "../Footer/Footer.jsx";
-
-function App() {
-  return (
-    <div className="page">
-      <Header location="New Jersey" />
-      <Main />
-      <Footer />
-    </div>
-  );
-}
-
-export default App;
