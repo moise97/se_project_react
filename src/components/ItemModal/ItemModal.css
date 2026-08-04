@@ -1,0 +1,13 @@
+.modal__content_type_image {
+  padding: 0;
+  overflow: hidden;
+}
+
+.modal__image {
+  width: 100%;
+  display: block;
+}
+
+.modal__footer {
+  padding: 20px 28px;
+}

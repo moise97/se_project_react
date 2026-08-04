@@ -3,16 +3,76 @@ import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
+import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+import ItemModal from "../ItemModal/ItemModal.jsx";
 import { defaultClothingItems } from "../../utils/clothingItems.js";
 
 function App() {
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [activeModal, setActiveModal] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
+
+  function handleAddClick() {
+    setActiveModal("add-garment");
+  }
+
+  function handleCardClick(card) {
+    setActiveModal("preview");
+    setSelectedCard(card);
+  }
+
+  function handleCloseModal() {
+    setActiveModal("");
+  }
 
   return (
     <div className="page">
-      <Header location="New Jersey" />
-      <Main clothingItems={clothingItems} />
+      <Header location="New Jersey" onAddClick={handleAddClick} />
+      <Main clothingItems={clothingItems} onCardClick={handleCardClick} />
       <Footer />
+      <ModalWithForm
+        title="New garment"
+        name="add-garment"
+        buttonText="Add garment"
+        isOpen={activeModal === "add-garment"}
+        onClose={handleCloseModal}
+      >
+        <label className="modal__label">
+          Name
+          <input
+            type="text"
+            className="modal__input"
+            placeholder="Name"
+            required
+          />
+        </label>
+        <label className="modal__label">
+          Image
+          <input
+            type="url"
+            className="modal__input"
+            placeholder="Image URL"
+            required
+          />
+        </label>
+        <fieldset className="modal__radio-fieldset">
+          <legend className="modal__legend">Select the weather type:</legend>
+          <label className="modal__radio-label">
+            <input type="radio" name="weather" value="hot" /> Hot
+          </label>
+          <label className="modal__radio-label">
+            <input type="radio" name="weather" value="warm" /> Warm
+          </label>
+          <label className="modal__radio-label">
+            <input type="radio" name="weather" value="cold" /> Cold
+          </label>
+        </fieldset>
+      </ModalWithForm>
+      <ItemModal
+        isOpen={activeModal === "preview"}
+        card={selectedCard}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }
