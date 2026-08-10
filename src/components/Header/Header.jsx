@@ -1,4 +1,6 @@
 import "./Header.css";
+import logo from "../../assets/logo.svg";
+import avatar from "../../assets/avatar.png";
 
 function Header({ location, onAddClick }) {
   const currentDate = new Date().toLocaleString("default", {
@@ -8,7 +10,7 @@ function Header({ location, onAddClick }) {
 
   return (
     <header className="header">
-      <p className="header__logo">WTWR</p>
+      <img src={logo} alt="WTWR logo" className="header__logo" />
       <p className="header__date-location">
         {currentDate}, {location}
       </p>
@@ -21,7 +23,7 @@ function Header({ location, onAddClick }) {
       </button>
       <div className="header__user-container">
         <p className="header__username">Moise Michaud</p>
-        <img src="" alt="Moise Michaud" className="header__avatar" />
+        <img src={avatar} alt="Moise Michaud" className="header__avatar" />
       </div>
     </header>
   );

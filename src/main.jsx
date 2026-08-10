@@ -2,6 +2,9 @@ import "./Main.css";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 import { getWeatherCondition } from "../../utils/weatherApi.js";
 import WeatherCard from "../WeatherCard/WeatherCard.jsx";
+import "./vendor/normalize.css";
+import "./vendor/fonts.css";
+import "./index.css";
 
 function Main({ weatherData, clothingItems, onCardClick }) {
   const weatherCondition = getWeatherCondition(weatherData.temperature);
