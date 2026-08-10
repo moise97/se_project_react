@@ -1,0 +1,16 @@
+.weather-card {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  height: 80px;
+  border-radius: 16px;
+  background: linear-gradient(to right, #00a3ff, #ffc700);
+  margin-bottom: 24px;
+}
+
+.weather-card__temp {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+}
