@@ -1,8 +1,16 @@
 import "./ItemModal.css";
-
 function ItemModal({ isOpen, card, onClose }) {
+  function handleOverlayClick(evt) {
+    if (evt.target === evt.currentTarget) {
+      onClose();
+    }
+  }
+
   return (
-    <div className={`modal ${isOpen ? "modal_is-opened" : ""}`}>
+    <div
+      className={`modal ${isOpen ? "modal_is-opened" : ""}`}
+      onClick={handleOverlayClick}
+    >
       <div className="modal__content modal__content_type_image">
         <button
           className="modal__close-btn"
