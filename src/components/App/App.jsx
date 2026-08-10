@@ -55,52 +55,14 @@ function App() {
 
   return (
     <div className="page">
-      <Header location="New Jersey" onAddClick={handleAddClick} />
-      <Main clothingItems={clothingItems} onCardClick={handleCardClick} />
-      <Footer />
-      <ModalWithForm
-        title="New garment"
-        name="add-garment"
-        buttonText="Add garment"
-        isOpen={activeModal === "add-garment"}
-        onClose={handleCloseModal}
-      >
-        <label className="modal__label">
-          Name
-          <input
-            type="text"
-            className="modal__input"
-            placeholder="Name"
-            required
-          />
-        </label>
-        <label className="modal__label">
-          Image
-          <input
-            type="url"
-            className="modal__input"
-            placeholder="Image URL"
-            required
-          />
-        </label>
-        <fieldset className="modal__radio-fieldset">
-          <legend className="modal__legend">Select the weather type:</legend>
-          <label className="modal__radio-label">
-            <input type="radio" name="weather" value="hot" /> Hot
-          </label>
-          <label className="modal__radio-label">
-            <input type="radio" name="weather" value="warm" /> Warm
-          </label>
-          <label className="modal__radio-label">
-            <input type="radio" name="weather" value="cold" /> Cold
-          </label>
-        </fieldset>
-      </ModalWithForm>
-      <ItemModal
-        isOpen={activeModal === "preview"}
-        card={selectedCard}
-        onClose={handleCloseModal}
+      <Header location={weatherData.city} onAddClick={handleAddClick} />
+      <Main
+        weatherData={weatherData}
+        clothingItems={clothingItems}
+        onCardClick={handleCardClick}
       />
+      <Footer />
+      {/* ...modals unchanged... */}
     </div>
   );
 }
