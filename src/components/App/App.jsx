@@ -7,14 +7,12 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import { defaultClothingItems } from "../../utils/clothingItems.js";
 import { getWeather, parseWeatherData } from "../../utils/weatherApi.js";
+
 function App() {
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [weatherData, setWeatherData] = useState({
-    city: "",
-    temperature: null,
-  });
+  const [weatherData, setWeatherData] = useState({ city: "", temperature: null });
 
   function handleAddClick() {
     setActiveModal("add-garment");
@@ -30,6 +28,14 @@ function App() {
   }
 
   useEffect(() => {
+    getWeather()
+      .then((data) => {
+        setWeatherData(parseWeatherData(data));
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
     if (!activeModal) return;
 
     function handleEscClose(evt) {
@@ -37,14 +43,6 @@ function App() {
         handleCloseModal();
       }
     }
-
-    useEffect(() => {
-      getWeather()
-        .then((data) => {
-          setWeatherData(parseWeatherData(data));
-        })
-        .catch(console.error);
-    }, []);
 
     document.addEventListener("keydown", handleEscClose);
 
@@ -62,7 +60,49 @@ function App() {
         onCardClick={handleCardClick}
       />
       <Footer />
-      {/* ...modals unchanged... */}
+      <ModalWithForm
+        title="New garment"
+        name="add-garment"
+        buttonText="Add garment"
+        isOpen={activeModal === "add-garment"}
+        onClose={handleCloseModal}
+      >
+        <label className="modal__label">
+          Name
+          <input
+            type="text"
+            className="modal__input"
+            placeholder="Name"
+            required
+          />
+        </label>
+        <label className="modal__label">
+          Image
+          <input
+            type="url"
+            className="modal__input"
+            placeholder="Image URL"
+            required
+          />
+        </label>
+        <fieldset className="modal__radio-fieldset">
+          <legend className="modal__legend">Select the weather type:</legend>
+          <label className="modal__radio-label">
+            <input type="radio" name="weather" value="hot" /> Hot
+          </label>
+          <label className="modal__radio-label">
+            <input type="radio" name="weather" value="warm" /> Warm
+          </label>
+          <label className="modal__radio-label">
+            <input type="radio" name="weather" value="cold" /> Cold
+          </label>
+        </fieldset>
+      </ModalWithForm>
+      <ItemModal
+        isOpen={activeModal === "preview"}
+        card={selectedCard}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }
