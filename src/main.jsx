@@ -1,29 +1,12 @@
-import "./Main.css";
-import ItemCard from "../ItemCard/ItemCard.jsx";
-import { getWeatherCondition } from "../../utils/weatherApi.js";
-import WeatherCard from "../WeatherCard/WeatherCard.jsx";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./components/App/App.jsx";
 import "./vendor/normalize.css";
 import "./vendor/fonts.css";
 import "./index.css";
 
-function Main({ weatherData, clothingItems, onCardClick }) {
-  const weatherCondition = getWeatherCondition(weatherData.temperature);
-
-  return (
-    <main className="main">
-      <WeatherCard weatherData={weatherData} />
-      <p className="main__text">
-        Today is {weatherData.temperature}°F / You may want to wear:
-      </p>
-      <ul className="main__items">
-        {clothingItems
-          .filter((item) => item.weather.toLowerCase() === weatherCondition)
-          .map((item) => (
-            <ItemCard key={item._id} card={item} onCardClick={onCardClick} />
-          ))}
-      </ul>
-    </main>
-  );
-}
-
-export default Main;
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

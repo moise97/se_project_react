@@ -1,14 +1,23 @@
 import "./Main.css";
 import ItemCard from "../ItemCard/ItemCard.jsx";
+import WeatherCard from "../WeatherCard/WeatherCard.jsx";
+import { getWeatherCondition } from "../../utils/weatherApi.js";
 
-function Main({ clothingItems, onCardClick }) {
+function Main({ weatherData, clothingItems, onCardClick }) {
+  const weatherCondition = getWeatherCondition(weatherData.temperature);
+
   return (
     <main className="main">
-      <p className="main__text">Today is 75°F / You may want to wear:</p>
+      <WeatherCard weatherData={weatherData} />
+      <p className="main__text">
+        Today is {weatherData.temperature}°F / You may want to wear:
+      </p>
       <ul className="main__items">
-        {clothingItems.map((item) => (
-          <ItemCard key={item._id} card={item} onCardClick={onCardClick} />
-        ))}
+        {clothingItems
+          .filter((item) => item.weather.toLowerCase() === weatherCondition)
+          .map((item) => (
+            <ItemCard key={item._id} card={item} onCardClick={onCardClick} />
+          ))}
       </ul>
     </main>
   );
