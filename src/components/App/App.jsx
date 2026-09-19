@@ -5,14 +5,17 @@ import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
-import { defaultClothingItems } from "../../utils/clothingItems.js";
+import { getItems } from "../../utils/api.js";
 import { getWeather, parseWeatherData } from "../../utils/weatherApi.js";
 
 function App() {
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [weatherData, setWeatherData] = useState({ city: "", temperature: null });
+  const [weatherData, setWeatherData] = useState({
+    city: "",
+    temperature: null,
+  });
 
   function handleAddClick() {
     setActiveModal("add-garment");
@@ -31,6 +34,14 @@ function App() {
     getWeather()
       .then((data) => {
         setWeatherData(parseWeatherData(data));
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((items) => {
+        setClothingItems(items);
       })
       .catch(console.error);
   }, []);

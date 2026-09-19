@@ -1,14 +1,10 @@
 import { apiKey, coordinates } from "./constants.js";
+import { checkResponse } from "./api.js";
 
 function getWeather() {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&lon=${coordinates.longitude}&units=imperial&appid=${apiKey}`
-  ).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
-  });
+    `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&lon=${coordinates.longitude}&units=imperial&appid=${apiKey}`,
+  ).then(checkResponse);
 }
 
 function parseWeatherData(data) {
