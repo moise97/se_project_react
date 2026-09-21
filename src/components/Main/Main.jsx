@@ -22,11 +22,7 @@ function Main({ weatherData, clothingItems, onCardClick }) {
           clothingItems
             .filter((item) => item.weather.toLowerCase() === weatherCondition)
             .map((item) => (
-              <ItemCard
-                key={item._id}
-                card={item}
-                onCardClick={onCardClick}
-              />
+              <ItemCard key={item._id} card={item} onCardClick={onCardClick} />
             ))}
       </ul>
     </main>
