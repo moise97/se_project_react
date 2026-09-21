@@ -17,3 +17,17 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.header__logo-link {
+  display: flex;
+}
+
+.header__user-container {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header__logo-link:hover,
+.header__user-container:hover {
+  opacity: 0.6;
+}

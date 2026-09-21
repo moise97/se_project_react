@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
+import Profile from "../Profile/Profile.jsx";
 import Footer from "../Footer/Footer.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
@@ -65,11 +67,28 @@ function App() {
   return (
     <div className="page">
       <Header location={weatherData.city} onAddClick={handleAddClick} />
-      <Main
-        weatherData={weatherData}
-        clothingItems={clothingItems}
-        onCardClick={handleCardClick}
-      />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Main
+              weatherData={weatherData}
+              clothingItems={clothingItems}
+              onCardClick={handleCardClick}
+            />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              clothingItems={clothingItems}
+              onCardClick={handleCardClick}
+              onAddClick={handleAddClick}
+            />
+          }
+        />
+      </Routes>
       <Footer />
       <ModalWithForm
         title="New garment"
