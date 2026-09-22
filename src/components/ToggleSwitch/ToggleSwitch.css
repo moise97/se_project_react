@@ -1,0 +1,56 @@
+.toggle-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 56px;
+  height: 28px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.toggle-switch:hover {
+  border-color: #000;
+}
+
+.toggle-switch__checkbox {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.toggle-switch__circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #000;
+  transition: transform 0.3s ease;
+}
+
+.toggle-switch__checkbox:checked + .toggle-switch__circle {
+  transform: translateX(28px);
+}
+
+.toggle-switch__text {
+  position: relative;
+  width: 24px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  transition: color 0.3s ease;
+}
+
+.toggle-switch__checkbox:not(:checked) ~ .toggle-switch__text_unit_f {
+  color: #fff;
+}
+
+.toggle-switch__checkbox:checked ~ .toggle-switch__text_unit_c {
+  color: #fff;
+}
