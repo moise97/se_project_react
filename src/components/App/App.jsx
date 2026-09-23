@@ -5,10 +5,11 @@ import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Profile from "../Profile/Profile.jsx";
 import Footer from "../Footer/Footer.jsx";
-import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
+import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal.jsx";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
-import { getItems } from "../../utils/api.js";
+import { getItems, addItem, deleteItem } from "../../utils/api.js";
 import { getWeather, parseWeatherData } from "../../utils/weatherApi.js";
 
 function App() {
@@ -36,6 +37,32 @@ function App() {
 
   function handleCloseModal() {
     setActiveModal("");
+  }
+
+  function handleDeleteClick() {
+    setActiveModal("delete-confirm");
+  }
+
+  function handleAddItemSubmit(item, resetForm) {
+    addItem(item)
+      .then((newItem) => {
+        setClothingItems([newItem, ...clothingItems]);
+        resetForm();
+        handleCloseModal();
+      })
+      .catch(console.error);
+  }
+
+  function handleCardDelete() {
+    deleteItem(selectedCard._id)
+      .then(() => {
+        setClothingItems(
+          clothingItems.filter((item) => item._id !== selectedCard._id)
+        );
+        setSelectedCard({});
+        handleCloseModal();
+      })
+      .catch(console.error);
   }
 
   useEffect(() => {
@@ -99,48 +126,21 @@ function App() {
           />
         </Routes>
         <Footer />
-        <ModalWithForm
-          title="New garment"
-          name="add-garment"
-          buttonText="Add garment"
+        <AddItemModal
           isOpen={activeModal === "add-garment"}
-          onClose={handleCloseModal}
-        >
-          <label className="modal__label">
-            Name
-            <input
-              type="text"
-              className="modal__input"
-              placeholder="Name"
-              required
-            />
-          </label>
-          <label className="modal__label">
-            Image
-            <input
-              type="url"
-              className="modal__input"
-              placeholder="Image URL"
-              required
-            />
-          </label>
-          <fieldset className="modal__radio-fieldset">
-            <legend className="modal__legend">Select the weather type:</legend>
-            <label className="modal__radio-label">
-              <input type="radio" name="weather" value="hot" /> Hot
-            </label>
-            <label className="modal__radio-label">
-              <input type="radio" name="weather" value="warm" /> Warm
-            </label>
-            <label className="modal__radio-label">
-              <input type="radio" name="weather" value="cold" /> Cold
-            </label>
-          </fieldset>
-        </ModalWithForm>
+          onAddItem={handleAddItemSubmit}
+          onCloseModal={handleCloseModal}
+        />
         <ItemModal
           isOpen={activeModal === "preview"}
           card={selectedCard}
           onClose={handleCloseModal}
+          onDeleteClick={handleDeleteClick}
+        />
+        <DeleteConfirmModal
+          isOpen={activeModal === "delete-confirm"}
+          onClose={handleCloseModal}
+          onConfirm={handleCardDelete}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>
