@@ -57,7 +57,7 @@ function App() {
     deleteItem(selectedCard._id)
       .then(() => {
         setClothingItems(
-          clothingItems.filter((item) => item._id !== selectedCard._id)
+          clothingItems.filter((item) => item._id !== selectedCard._id),
         );
         setSelectedCard({});
         handleCloseModal();

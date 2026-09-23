@@ -8,7 +8,7 @@ const WARM_THRESHOLD_F = 66;
 
 function getWeather() {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&lon=${coordinates.longitude}&units=imperial&appid=${apiKey}`
+    `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&lon=${coordinates.longitude}&units=imperial&appid=${apiKey}`,
   ).then(checkResponse);
 }
 
