@@ -8,7 +8,7 @@ import Footer from "../Footer/Footer.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal.jsx";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit.js";
 import { getItems, addItem, deleteItem } from "../../utils/api.js";
 import { getWeather, parseWeatherData } from "../../utils/weatherApi.js";
 
