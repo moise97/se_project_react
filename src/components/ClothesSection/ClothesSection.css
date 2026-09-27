@@ -14,7 +14,7 @@
   margin: 0;
   font-size: 16px;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.6);
+  color: #000;
 }
 
 .clothes-section__add-btn {
@@ -24,7 +24,7 @@
   font: inherit;
   font-size: 16px;
   font-weight: 500;
-  color: #000;
+  color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
 }
 
