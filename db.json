@@ -89,6 +89,12 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
       "weather": "cold",
       "_id": 17
+    },
+    {
+      "name": "beanie ",
+      "imageUrl": "https://unsplash.com/photos/hats-on-display-in-a-store-Aex_NNW2mhs",
+      "weather": "warm",
+      "_id": 18
     }
   ]
 }
